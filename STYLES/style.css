@@ -1,0 +1,29 @@
+/*Margem 0 para todos elementos*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*SECUNDARY BOX*/
+div {
+  background-color: #175a2c;
+  width: 150px;
+  padding: 10px; /*Espaçamento interno */
+  border-radius: 10px; /*Radius e raio de circulo*/
+  /* border: 2px black dotted; */
+  /* margin: 10px; */
+}
+
+/*SUB TITLE*/
+p {
+  color: white;
+  font-weight: 600;
+  font-family: "Montserrat";
+}
+
+/*IMAGEM*/
+svg {
+  width: 50px;
+  fill: #7effb2;
+}
