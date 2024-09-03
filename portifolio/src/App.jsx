@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"; //permite construir variavel de estado
+import { useState, useRef, useEffect } from "react"; //permite construir variavel de estado
 import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Music1 from "./assets/music1.jpeg";
@@ -7,12 +7,22 @@ import BotoesControle from "./BotoesControle";
 import SeletorMusicas from "./SeletorMusicas";
 import musica from "./assets/musicas/musica";
 import GerenciadorFaixa from "./GerenciadorFaixa";
+import ContainerProgresso from "./ContainerProgresso";
 
 function App() {
-  // let play = true;
   const [taTocando, definirTaTocando] = useState(false); //retorna o array de true ou false de forma dinamica
   const [faixaAtual, definirFaixaAtual] = useState(0);
+  const [tempoTotalFaixa, definirTempoTotalFaixa] = useState(0);
+  const [tempoAutalFaixa, definirTempoAtualFaixa] = useState(0);
   const tagAudio = useRef(null);
+  const barraProgresso = useRef(null);
+
+  //Usando HOOK para controla status da musica
+  useEffect(() => {
+    if (taTocando) {
+      tocarFaixa();
+    }
+  }, [faixaAtual]);
 
   const informacoesMusica = {
     nome: "FellingSongs",
@@ -23,20 +33,17 @@ function App() {
     textoAlternativo: "Capa da faixa de FellingSongs",
   };
 
-  const tocarFaixa = () => {
-    if (tagAudio.current) {
-      tagAudio.current.play();
-      definirTaTocando(true);
-    }
-  };
+  function tocarFaixa() {
+    tagAudio.current.play();
+    definirTaTocando(true);
+  }
 
-  const pausarFaixa = () => {
-    if (tagAudio.current) {
-      tagAudio.current.pause();
-      definirTaTocando(false);
-    }
-  };
+  function pausarFaixa() {
+    tagAudio.current.pause();
+    definirTaTocando(false);
+  }
 
+  //Pausar ou rodar musica
   const tocarOuPausarFaixa = () => {
     if (taTocando) {
       pausarFaixa();
@@ -45,8 +52,40 @@ function App() {
     }
   };
 
+  //Define musica que vai tocar após clique do botão
+  const avancarFaixa = () => {
+    if (informacoesMusica.totalMusicas === faixaAtual + 1) {
+      definirFaixaAtual(0);
+    } else {
+      definirFaixaAtual(faixaAtual + 1);
+    }
+  };
+
+  //Define musica que vai tocar após clique do botão
+  const voltarFaixa = () => {
+    if (faixaAtual === 0) {
+      definirFaixaAtual(informacoesMusica.totalMusicas - 1);
+    } else {
+      definirFaixaAtual(faixaAtual - 1);
+    }
+  };
+
+  const avancar10s = () => {
+    tagAudio.current.currentTime += 10;
+  };
+
+  const voltar10s = () => {
+    tagAudio.current.currentTime -= 10;
+  };
+
+  const cliqueAvanco = (evento) => {
+    const largura = barraProgresso.current.clientWidth;//clientWidth é uma propriedade que informa a largura do elemento em pixels
+    const novoTempo = (evento.nativeEvent.offsetX/largura) * tempoTotalFaixa //evento vem do proprio navegador onde tem o nativEvent que tem offsetX/offsetY
+    tagAudio.current.currentTime = novoTempo;
+  };
+
   return (
-    <div className="container">
+    <>
       <Capa
         imagemCapa={informacoesMusica.capa}
         textoAlternativo={informacoesMusica.textoAlternativo}
@@ -55,12 +94,24 @@ function App() {
       <GerenciadorFaixa
         faixa={informacoesMusica.musicas[faixaAtual]}
         referencia={tagAudio}
+        definirTempoTotalFaixa={definirTempoTotalFaixa}
+        definirTempoAtualFaixa={definirTempoAtualFaixa}
+      />
+      <ContainerProgresso
+        tempoTotalFaixa={tempoTotalFaixa}
+        tempoAutalFaixa={tempoAutalFaixa}
+        barraProgresso={barraProgresso}
+        cliqueAvanco={cliqueAvanco}
       />
       <BotoesControle
         taTocando={taTocando}
         tocarOuPausarFaixa={tocarOuPausarFaixa}
+        avancarFaixa={avancarFaixa}
+        voltarFaixa={voltarFaixa}
+        avancar10s={avancar10s}
+        voltar10s={voltar10s}
       />
-    </div>
+    </>
   );
 }
 
