@@ -79,9 +79,11 @@
 }
 
 .capa {
-  margin-top: 2rem; /* Ajuste conforme necessário */
-  object-fit: contain;
-  height: auto; /* Ajuste a altura da capa */
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin-top: 2rem;
+  display: block; 
 }
 
 .seletor {

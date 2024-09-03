@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react"; //permite construir variavel de estado
 import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Music1 from "./assets/music1.jpeg";
 import Capa from "./Capa";
 import BotoesControle from "./BotoesControle";
 import SeletorMusicas from "./SeletorMusicas";
 import musica from "./assets/musicas/musica";
+import semCapa from "./assets/capas/semCapa.jpg";
 import GerenciadorFaixa from "./GerenciadorFaixa";
 import ContainerProgresso from "./ContainerProgresso";
 
@@ -25,13 +25,14 @@ function App() {
     }
   }, [faixaAtual]);
 
+  //informações de musicas
   const informacoesMusica = {
     nome: nomeFaixaAtual,
     autor: "breathing",
-    totalMusicas: 2,
-    capa: Music1,
+    totalMusicas: musica.length, // Atualizado para usar a quantidade de musica do array
+    capa: musica,
     musicas: musica,
-    textoAlternativo: "Capa da faixa de FellingSongs",
+    textoAlternativo: semCapa,
   };
 
   function tocarFaixa() {
@@ -88,12 +89,12 @@ function App() {
   return (
     <>
       <Capa
-        imagemCapa={informacoesMusica.capa}
+        imagemCapa={informacoesMusica.musicas[faixaAtual]?.capa}
         textoAlternativo={informacoesMusica.textoAlternativo}
       />
       <SeletorMusicas nomeFaixaAtual={nomeFaixaAtual} />
       <GerenciadorFaixa
-        faixa={informacoesMusica.musicas[faixaAtual]}
+        faixa={informacoesMusica.musicas[faixaAtual]?.faixa}
         referencia={tagAudio}
         definirTempoTotalFaixa={definirTempoTotalFaixa}
         definirTempoAtualFaixa={definirTempoAtualFaixa}
