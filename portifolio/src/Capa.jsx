@@ -1,7 +1,7 @@
-function Cape(props) {
+function Capa(props) {
   return (
-    <img className="capa" src={props.imagemCapa} alt={props.alternativeText} />
+    <img className="capa" src={props.imagemCapa} alt={props.textoAlternativo} />
   );
 }
 
-export default Cape;
+export default Capa;

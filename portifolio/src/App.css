@@ -8,11 +8,11 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-image: linear-gradient(
-    #dcddc1,
-    #3d443a,
-    #0a1b2a,
-    #010d19,
-    #010d19
+    #f5f5f5,
+    #e0e0e0,
+    #c1c1c1,
+    #a0a0a0,
+    #888888
   );
 
   font-synthesis: none;
@@ -39,6 +39,15 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  min-height: 100vh; /* Garante que o container ocupe a altura total da tela */
+}
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -70,9 +79,9 @@
 }
 
 .capa {
-  margin-top: 20dvh;
+  margin-top: 2rem; /* Ajuste conforme necessário */
   object-fit: contain;
-  height: 30dvh;
+  height: auto; /* Ajuste a altura da capa */
 }
 
 .seletor {
@@ -139,18 +148,22 @@
 
 .caixa-botoes {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem; /* Espaçamento entre os botões */
+  justify-content: center; /* Centraliza horizontalmente */
   align-items: center;
-  width: 60%;
-  max-width: 400px;
-  & > button {
-    background-color: transparent;
-    border: none;
-    font-size: 1.5rem;
-  }
-  & :not(:first-child):not(:last-child) {
-    font-size: 2rem;
-  }
+  margin-top: 1rem; /* Espaço acima dos botões */
+  width: 100%;
+  max-width: 400px; /* Ajuste o tamanho máximo conforme necessário */
+}
+
+.caixa-botoes button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.caixa-botoes button:not(:first-child):not(:last-child) {
+  font-size: 2rem;
 }
 
 .play-pause {

@@ -1,35 +1,66 @@
-import { useState, useEffect } from "react"; //permite construir variavel de estado
+import { useState, useRef } from "react"; //permite construir variavel de estado
 import "./App.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import BrasCubasImg from "./assets/bras_cubas.jpeg";
-import Cape from "./Capa";
-import SelectorCharpters from "./SelectChapters";
-import ControlButtons from "./ControlButton";
+import Music1 from "./assets/music1.jpeg";
+import Capa from "./Capa";
+import BotoesControle from "./BotoesControle";
+import SeletorMusicas from "./SeletorMusicas";
+import musica from "./assets/musicas/musica";
+import GerenciadorFaixa from "./GerenciadorFaixa";
 
 function App() {
   // let play = true;
-  const [play, setplay] = useState(false); //retorna o array de true ou false de forma dinamica
-  useEffect(() => {
-    setplay(true);
-  }, []);
+  const [taTocando, definirTaTocando] = useState(false); //retorna o array de true ou false de forma dinamica
+  const [faixaAtual, definirFaixaAtual] = useState(0);
+  const tagAudio = useRef(null);
 
-  const informbook = {
-    name: "Memórias Póstumas de Brás Cubas",
-    author: "Machado de Assis",
-    chapters: 2,
-    cape: BrasCubasImg,
-    alternativeText: "Capa do livro Memórias Póstumas de Brás Cubas",
+  const informacoesMusica = {
+    nome: "FellingSongs",
+    autor: "breathing",
+    totalMusicas: 2,
+    capa: Music1,
+    musicas: musica,
+    textoAlternativo: "Capa da faixa de FellingSongs",
+  };
+
+  const tocarFaixa = () => {
+    if (tagAudio.current) {
+      tagAudio.current.play();
+      definirTaTocando(true);
+    }
+  };
+
+  const pausarFaixa = () => {
+    if (tagAudio.current) {
+      tagAudio.current.pause();
+      definirTaTocando(false);
+    }
+  };
+
+  const tocarOuPausarFaixa = () => {
+    if (taTocando) {
+      pausarFaixa();
+    } else {
+      tocarFaixa();
+    }
   };
 
   return (
-    <>
-      <Cape
-        imagemCapa={informbook.cape}
-        alternativeText={informbook.alternativeText}
+    <div className="container">
+      <Capa
+        imagemCapa={informacoesMusica.capa}
+        textoAlternativo={informacoesMusica.textoAlternativo}
       />
-      <SelectorCharpters chapterNow={1} />
-      <ControlButtons play={play} setplay={setplay} />
-    </>
+      <SeletorMusicas musicaAtual={faixaAtual + 1} />
+      <GerenciadorFaixa
+        faixa={informacoesMusica.musicas[faixaAtual]}
+        referencia={tagAudio}
+      />
+      <BotoesControle
+        taTocando={taTocando}
+        tocarOuPausarFaixa={tocarOuPausarFaixa}
+      />
+    </div>
   );
 }
 
