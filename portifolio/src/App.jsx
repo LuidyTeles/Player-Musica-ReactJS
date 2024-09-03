@@ -14,6 +14,7 @@ function App() {
   const [faixaAtual, definirFaixaAtual] = useState(0);
   const [tempoTotalFaixa, definirTempoTotalFaixa] = useState(0);
   const [tempoAutalFaixa, definirTempoAtualFaixa] = useState(0);
+  const [nomeFaixaAtual, definirNomeFaixaAtual] = useState("");
   const tagAudio = useRef(null);
   const barraProgresso = useRef(null);
 
@@ -25,7 +26,7 @@ function App() {
   }, [faixaAtual]);
 
   const informacoesMusica = {
-    nome: "FellingSongs",
+    nome: nomeFaixaAtual,
     autor: "breathing",
     totalMusicas: 2,
     capa: Music1,
@@ -90,12 +91,13 @@ function App() {
         imagemCapa={informacoesMusica.capa}
         textoAlternativo={informacoesMusica.textoAlternativo}
       />
-      <SeletorMusicas musicaAtual={faixaAtual + 1} />
+      <SeletorMusicas nomeFaixaAtual={nomeFaixaAtual} />
       <GerenciadorFaixa
         faixa={informacoesMusica.musicas[faixaAtual]}
         referencia={tagAudio}
         definirTempoTotalFaixa={definirTempoTotalFaixa}
         definirTempoAtualFaixa={definirTempoAtualFaixa}
+        definirNomeFaixa={definirNomeFaixaAtual}
       />
       <ContainerProgresso
         tempoTotalFaixa={tempoTotalFaixa}

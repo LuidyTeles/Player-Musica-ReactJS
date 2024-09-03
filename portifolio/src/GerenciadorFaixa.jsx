@@ -3,16 +3,26 @@ const GerenciadorFaixa = ({
   referencia,
   definirTempoTotalFaixa,
   definirTempoAtualFaixa,
+  definirNomeFaixa,
 }) => {
+  const nomeFaixa = (caminho) => {
+    const partes = caminho.split("/");
+    const nome = partes[partes.length - 1];
+    return nome;
+  };
+
+  const nome = nomeFaixa(faixa);
+
   return (
     <audio
       src={faixa}
-      ref={referencia} //joga uma referencia para variavel
-      onLoadedMetadata={
-        () => definirTempoTotalFaixa(referencia.current.duration) //Pegar duração da faixa em segundos
-      }
-      onTimeUpdate={
-        () => definirTempoAtualFaixa(referencia.current.currentTime) //Sempre que pega tempo ele atualiza variavel de estado
+      ref={referencia}
+      onLoadedMetadata={() => {
+        definirTempoTotalFaixa(referencia.current.duration);
+        definirNomeFaixa(nome);
+      }}
+      onTimeUpdate={() =>
+        definirTempoAtualFaixa(referencia.current.currentTime)
       }
     />
   );

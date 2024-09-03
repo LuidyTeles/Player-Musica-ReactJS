@@ -1,7 +1,5 @@
-function Capa(props) {
-  return (
-    <img className="capa" src={props.imagemCapa} alt={props.textoAlternativo} />
-  );
+function Capa({ imagemCapa, textoAlternativo }) {
+  return <img className="capa" src={imagemCapa} alt={textoAlternativo} />;
 }
 
 export default Capa;
