@@ -1,112 +1,97 @@
 :root {
-  font-family: sans-serif, audible-font, Inter, system-ui, Avenir, Helvetica,
-    Arial;
-  line-height: 1.5;
-  font-weight: 400;
-  box-sizing: border-box;
-  font-size: 1.3rem;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-image: linear-gradient(
-    #f5f5f5,
-    #e0e0e0,
-    #c1c1c1,
-    #a0a0a0,
-    #888888
-  );
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --light-gray: #606f81;
+  --panel-gap: 1rem;
+  --light-gray: #ccc;
+  --dark-gray: #333;
 }
 
 #root {
-  width: 100%;
-  height: 100dvh;
-  margin: 0 auto;
-  text-align: center;
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "sidebar-left content sidebar-right"
+    "footer footer footer";
+  grid-template-rows: 60px 1fr 80px;
+  grid-template-columns: 200px 1fr 200px;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+.header {
+  grid-area: header;
+  background-color: var(--dark-gray);
   display: flex;
-  flex-direction: column;
-  justify-content: start;
   align-items: center;
+  justify-content: center;
+  color: white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.sidebar-left, .sidebar-right {
+  background-color: var(--dark-gray);
+  color: white;
 }
 
-.container {
+.sidebar-left {
+  grid-area: sidebar-left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-right {
+  grid-area: sidebar-right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  grid-area: content;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
-  justify-content: center; /* Centraliza verticalmente */
-  min-height: 100vh; /* Garante que o container ocupe a altura total da tela */
+  align-items: center;
+  justify-content: center;
+  padding: var(--panel-gap);
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-.capa {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  margin-top: 2rem;
-  display: block; 
-}
-
-.seletor {
-  margin-top: 12dvh;
-  width: 100%;
-  background-color: transparent;
+.footer {
+  grid-area: footer;
+  background-color: var(--dark-gray);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.botoes-controle {
+  display: flex;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
+}
+
+.botoes-controle button {
+  background-color: transparent;
   border: none;
-  & > p {
-    padding-left: 0.6rem;
-    font-weight: 800;
-    font-size: 1rem;
-  }
+  font-size: 1.5rem;
+  color: white;
+}
+
+.botoes-controle button:not(:first-child):not(:last-child) {
+  font-size: 2rem;
+}
+
+.play-pause {
+  font-size: 3rem;
 }
 
 .container-progresso {
   width: 100%;
+  margin-top: 1rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding-top: 1rem;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .progresso-total {
@@ -129,13 +114,21 @@
   border-radius: 10px;
 }
 
+.capa {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin-top: 2rem;
+  display: block; 
+}
+
 .marcador-posicao {
   position: absolute;
-  height: 25px;
-  width: 25px;
+  height: 10px;
+  width: 10px;
   background-color: #feb332;
   left: 50%;
-  top: -170%;
+  top: -50%;
   border-radius: 50%;
 }
 
@@ -146,29 +139,4 @@
   color: var(--light-gray);
   font-weight: 600;
   margin-top: 0.1rem;
-}
-
-.caixa-botoes {
-  display: flex;
-  gap: 1rem; /* Espaçamento entre os botões */
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center;
-  margin-top: 1rem; /* Espaço acima dos botões */
-  width: 100%;
-  max-width: 400px; /* Ajuste o tamanho máximo conforme necessário */
-}
-
-.caixa-botoes button {
-  background-color: transparent;
-  border: none;
-  font-size: 1.5rem;
-}
-
-.caixa-botoes button:not(:first-child):not(:last-child) {
-  font-size: 2rem;
-}
-
-.play-pause {
-  background: yellow;
-  font-size: 3rem;
 }

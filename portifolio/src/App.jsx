@@ -81,40 +81,51 @@ function App() {
   };
 
   const cliqueAvanco = (evento) => {
-    const largura = barraProgresso.current.clientWidth;//clientWidth é uma propriedade que informa a largura do elemento em pixels
-    const novoTempo = (evento.nativeEvent.offsetX/largura) * tempoTotalFaixa //evento vem do proprio navegador onde tem o nativEvent que tem offsetX/offsetY
+    const largura = barraProgresso.current.clientWidth; //clientWidth é uma propriedade que informa a largura do elemento em pixels
+    const novoTempo = (evento.nativeEvent.offsetX / largura) * tempoTotalFaixa; //evento vem do proprio navegador onde tem o nativEvent que tem offsetX/offsetY
     tagAudio.current.currentTime = novoTempo;
   };
 
   return (
-    <>
-      <Capa
-        imagemCapa={informacoesMusica.musicas[faixaAtual]?.capa}
-        textoAlternativo={informacoesMusica.textoAlternativo}
-      />
-      <SeletorMusicas nomeFaixaAtual={nomeFaixaAtual} />
-      <GerenciadorFaixa
-        faixa={informacoesMusica.musicas[faixaAtual]?.faixa}
-        referencia={tagAudio}
-        definirTempoTotalFaixa={definirTempoTotalFaixa}
-        definirTempoAtualFaixa={definirTempoAtualFaixa}
-        definirNomeFaixa={definirNomeFaixaAtual}
-      />
-      <ContainerProgresso
-        tempoTotalFaixa={tempoTotalFaixa}
-        tempoAutalFaixa={tempoAutalFaixa}
-        barraProgresso={barraProgresso}
-        cliqueAvanco={cliqueAvanco}
-      />
-      <BotoesControle
-        taTocando={taTocando}
-        tocarOuPausarFaixa={tocarOuPausarFaixa}
-        avancarFaixa={avancarFaixa}
-        voltarFaixa={voltarFaixa}
-        avancar10s={avancar10s}
-        voltar10s={voltar10s}
-      />
-    </>
+    <div id="root">
+      <header className="header"></header>
+
+      <aside className="sidebar-left"></aside>
+
+      <aside className="sidebar-right"></aside>
+
+      <main className="content">
+        <Capa
+          imagemCapa={informacoesMusica.musicas[faixaAtual]?.capa}
+          textoAlternativo={informacoesMusica.textoAlternativo}
+        />
+        <SeletorMusicas nomeFaixaAtual={nomeFaixaAtual} />
+        <GerenciadorFaixa
+          faixa={informacoesMusica.musicas[faixaAtual]?.faixa}
+          referencia={tagAudio}
+          definirTempoTotalFaixa={definirTempoTotalFaixa}
+          definirTempoAtualFaixa={definirTempoAtualFaixa}
+          definirNomeFaixa={definirNomeFaixaAtual}
+        />
+        <ContainerProgresso
+          tempoTotalFaixa={tempoTotalFaixa}
+          tempoAutalFaixa={tempoAutalFaixa}
+          barraProgresso={barraProgresso}
+          cliqueAvanco={cliqueAvanco}
+        />
+
+        <BotoesControle
+          taTocando={taTocando}
+          tocarOuPausarFaixa={tocarOuPausarFaixa}
+          avancarFaixa={avancarFaixa}
+          voltarFaixa={voltarFaixa}
+          avancar10s={avancar10s}
+          voltar10s={voltar10s}
+        />
+      </main>
+
+      <footer className="footer"></footer>
+    </div>
   );
 }
 

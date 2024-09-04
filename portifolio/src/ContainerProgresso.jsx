@@ -11,7 +11,7 @@ const ContainerProgresso = ({
   };
 
   return (
-    <section className="container-progresso" onClick={cliqueAvanco}>
+    <section className="container-progresso">
       <div className="progresso-total" ref={barraProgresso} onClick={cliqueAvanco}>
         <div
           className="progresso-atual"

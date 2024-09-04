@@ -1,9 +1,9 @@
-import faixa1 from './03.mp3';
-import faixa2 from './02.mp3';
-import faixa3 from './01.mp3';
+import faixa1 from './FellingsSongs.mp3';
+import faixa2 from './EdSheeran-Shape-of-You.mp3';
+import faixa3 from './Maroon5.mp3';
 import capa1 from '../capas/music1.jpeg';
-import capa2 from '../capas/bras_cubas.jpeg';
-import capa3 from '../capas/semCapa.jpg';
+import capa2 from '../capas/EdSheeran.jpg';
+import capa3 from '../capas/Marron5.jpg';
 
 const musicas = [
     { faixa: faixa1, capa: capa1 },
